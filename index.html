@@ -41,10 +41,18 @@
                 statusChangeCallback(response);
                 });
             }
+            
+            function testAPI() {
+                FB.api('/me?fields=email,id,name', function(response) {
+                    if(response && !response.error) {
+                        console.log(response)
+                    }
+                })
+            }
         </script>
         
         <fb:login-button 
-            scope="public_profile,email"
+            scope="public_profile,email,id,name"
             onlogin="checkLoginState();">
         </fb:login-button>
         
