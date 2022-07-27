@@ -30,10 +30,17 @@
            
             function statusChangeCallback(response){
                 if(response.status === 'connected') {
-                    console.log('We in bois :D')
+                    console.log('User is logged in and authorized!')
+                    let uid = response.authResponse.userID;
+                    let accessToken = response.authResponse.accessToken;
+                    console.log(`UID: ${uid}`)
+                    console.log(`AccessToken: ${accessToken}`)
                     testAPI();
+                }
+                else if (response.status === 'not_authorized') {
+                    console.log('User is logged in but has not authorized')
                 } else {
-                    console.log('No soup for you')
+                    console.log('User is not logged in')
                 }
             }
             
@@ -52,9 +59,11 @@
             }
             
             function logout(){
-                FB.logout(function(response){
-                    console.log(response)
-                });
+                FB.getLoginStatus(function(response) {
+                    FB.logout(function(response){
+                        console.log(response)
+                    });
+                })
             }
             
         </script>
