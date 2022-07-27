@@ -31,6 +31,7 @@
             function statusChangeCallback(response){
                 if(response.status === 'connected') {
                     console.log('We in bois :D')
+                    testAPI();
                 } else {
                     console.log('No soup for you')
                 }
@@ -38,7 +39,7 @@
             
             function checkLoginState() {
                 FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
+                    statusChangeCallback(response);
                 });
             }
             
@@ -49,13 +50,20 @@
                     }
                 })
             }
+            
+            function logout(){
+                FB.logout(function(response){
+                    console.log(response)
+                });
+            }
+            
         </script>
         
         <fb:login-button 
             scope="public_profile,email,id,name"
             onlogin="checkLoginState();">
         </fb:login-button>
-        
+        <button onclick="logout()">Logout</button> 
     </body>
 </html>
 
